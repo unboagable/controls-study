@@ -2,7 +2,40 @@
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Virtual environments
 .env
 .venv
+venv/
+ENV/
+env/
 
-*.DS_Store
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
