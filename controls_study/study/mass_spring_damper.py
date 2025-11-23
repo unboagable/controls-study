@@ -7,8 +7,13 @@ import scipy.signal as signal
 
 # System parameters
 m = 1.0   # mass (kg)
-b = 4.0   # damping coefficient
+b = 5.0   # damping coefficient
 k = 20.0  # spring stiffness
+
+# System characteristics
+omega_n = np.sqrt(k / m)  # natural frequency: ωn = √(k/m)
+zeta = b / (2 * np.sqrt(m * k))  # damping ratio: ζ = c / (2√(mk))
+omega_d = omega_n * np.sqrt(1 - zeta**2) if zeta < 1 else 0  # damped natural frequency: ωd = ωn√(1 − ζ²)
 
 # Transfer function numerator and denominator
 num = [1]
@@ -99,8 +104,15 @@ equations_text = [
     '',
     r'$m\ddot{x} + b\dot{x} + kx = F(t)$',
     '',
-    f'Parameters: $m={m}$ kg, $b={b}$ N·s/m, $k={k}$ N/m'
+    f'Parameters: $m={m}$ kg, $b={b}$ N·s/m, $k={k}$ N/m',
+    '',
+    f'Natural frequency: $\\omega_n = \\sqrt{{k/m}} = {omega_n:.3f}$ rad/s',
+    f'Damping ratio: $\\zeta = b/(2\\sqrt{{mk}}) = {zeta:.3f}$',
 ]
+if zeta < 1:
+    equations_text.append(f'Damped natural frequency: $\\omega_d = \\omega_n\\sqrt{{1-\\zeta^2}} = {omega_d:.3f}$ rad/s')
+else:
+    equations_text.append(f'System is {"critically damped" if abs(zeta - 1) < 1e-6 else "overdamped"} ($\\zeta \\geq 1$)')
 
 y_pos = 0.9
 for eq in equations_text:
