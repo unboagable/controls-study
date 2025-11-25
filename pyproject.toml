@@ -1,20 +1,21 @@
-[tool.poetry]
+[project]
 name = "controls_study"
 version = "0.1.0"
 description = "Controls projects, practice, and study."
-authors = ["Your Name <your@email.com>"]
+authors = [
+    { name = "Chang-Hyun Mungai", email = "changhyunmungai@gmail.com" }
+]
 readme = "README.md"
-packages = [
-    { include = "controls_study" }
+requires-python = ">=3.11,<3.14"
+
+dependencies = [
+  # pin to wheel-friendly versions to avoid numba/llvmlite compiles
+  "numpy>=1.24,<1.27",
+  "pandas",
+  "matplotlib",
+  "scipy"
 ]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-numpy = "*"
-matplotlib = "*"
-scipy = "*"
-
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
-
